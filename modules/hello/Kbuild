@@ -1,0 +1,4 @@
+EXTRA_CFLAGS = -Wall -g
+CONFIG_MODULE_SIG=n
+
+obj-m        = hello.o
