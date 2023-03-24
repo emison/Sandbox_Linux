@@ -52,53 +52,21 @@ void sort_rev(int n, char **s) {
 }
 
 int is_sorted(int n, char **s) {
-    char **s_copy;
-    int retval=TRUE;
-    s_copy=(char**)malloc(n*sizeof(char*));
-    // Copy strings
-    for (int i=0; i<n; i++) {
-        s_copy[i]=(char*)malloc(strlen(s[i])*sizeof(char*));
-        strcpy(s_copy[i], s[i]);
-    }
-    // Sort copy
-    sort(n, s_copy);
-    // Compare original with sorted copy
-    for (int i=0; i<n; i++) {
-        if (strcmp(s_copy[i], s[i])!=0) {
-            retval=FALSE;
+    for (int i=0; i<n-1; i++) {
+        if (strcmp(s[i],s[i+1])>0) {
+            return FALSE;
         }
     }
-    // Free
-    for (int i=0; i<n; i++) {
-        free(s_copy[i]);
-    }
-    free(s_copy);
-    return retval;
+    return TRUE;
 }
 
 int is_sorted_rev(int n, char **s) {
-    char **s_copy;
-    int retval=TRUE;
-    s_copy=(char**)malloc(n*sizeof(char*));
-    // Copy strings
-    for (int i=0; i<n; i++) {
-        s_copy[i]=(char*)malloc(strlen(s[i])*sizeof(char*));
-        strcpy(s_copy[i], s[i]);
-    }
-    // Sort copy
-    sort_rev(n, s_copy);
-    // Compare original with sorted copy
-    for (int i=0; i<n; i++) {
-        if (strcmp(s_copy[i], s[i])!=0) {
-            retval=FALSE;
+    for (int i=0; i<n-1; i++) {
+        if (strcmp(s[i],s[i+1])<0) {
+            return FALSE;
         }
     }
-    // Free
-    for (int i=0; i<n; i++) {
-        free(s_copy[i]);
-    }
-    free(s_copy);
-    return retval;
+    return TRUE;
 }
 
 int get_next_largest(int n, char **s) {
@@ -138,15 +106,11 @@ int next_permutation(int n, char **s)
     if (is_sorted_rev(n, s)) {
         return 0;
     } else if (n_next == 1) {
-        //printf("1: %s->%s\n", s[0], s[1]);
         swap(0, 1, n, s);
-        return 1;
     } else if (is_sorted_rev(n_next, s_next)) {
         next_largest=get_next_largest(n, s);
-        //printf("2: %s->%s\n", s[0], s[next_largest]);
         swap(0, next_largest, n, s);
         sort(n_next, s_next);
-        return 1;
     } else {
         next_permutation(n_next, s_next);
     }
