@@ -8,9 +8,12 @@ modules: oops hello
 
 perm:
 	make -C perm
-	#mv perm/perm bin/
+
+posttrans:
+	make -C posttrans
 
 bin:
-	find -executable -not -type d -exec mv bin
+	ln -sf `pwd`/perm/perm bin/perm
+	ln -sf `pwd`/posttrans/posttrans bin/posttrans
 
-.PHONY: bin perm modules hello oops
+.PHONY: bin perm posttrans modules hello oops
