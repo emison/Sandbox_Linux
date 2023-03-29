@@ -1,3 +1,8 @@
+/*
+* String Permutations (Exercise)
+* Source: HackerRank
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -103,14 +108,20 @@ int next_permutation(int n, char **s)
     int next_largest;
     int n_next=n-1;
     char **s_next=&s[1];
+    // Exit if already reverse sorted
     if (is_sorted_rev(n, s)) {
         return 0;
+    // Swap if there is only one index remaining
     } else if (n_next == 1) {
         swap(0, 1, n, s);
+    // If the remainder is sorted lex. from largest to smallest
+    // Swap current with the lex. next largest string
+    // Sort the remainder in lex. smallest to largest
     } else if (is_sorted_rev(n_next, s_next)) {
         next_largest=get_next_largest(n, s);
         swap(0, next_largest, n, s);
         sort(n_next, s_next);
+    // Recurse with the next lowest order sequence
     } else {
         next_permutation(n_next, s_next);
     }

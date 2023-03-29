@@ -1,3 +1,8 @@
+/*
+* Post Transit (Exercise)
+* Source: HackerRank
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
