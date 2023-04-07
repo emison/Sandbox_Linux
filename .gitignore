@@ -1,0 +1,10 @@
+callgrind.out*
+*.cmd
+*.ko
+*.log
+*.mod
+*.mod.c
+*.o
+*.order
+*.symvers
+bin/*
